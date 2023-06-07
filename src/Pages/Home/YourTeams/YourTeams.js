@@ -4,14 +4,14 @@ import ButtonPrimary from "../../../components/ButtonPrimary";
 
 const YourTeams = () => {
   return (
-    <div className="hero max-w-6xl m-20">
+    <div className="hero lg:max-w-6xl  lg:m-20">
       <div className="hero-content flex-col lg:flex-row">
         <img
           src={treatment}
-          className="max-w-sm rounded-lg shadow-2xl"
+          className="lg:max-w-sm rounded-lg shadow-2xl"
           alt="treatment"
         />
-        <div className="ml-8">
+        <div className="lg:ml-8 mx-3">
           <h1 className="text-5xl font-bold leading-normal	">
             Exceptional Dental Care, on Your Terms
           </h1>
