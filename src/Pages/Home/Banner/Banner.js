@@ -1,6 +1,7 @@
 import React from "react";
 import chair from "../../../assets/images/chair.png";
 import bgImage from "../../../assets/images/bg.png";
+import ButtonPrimary from "../../../components/ButtonPrimary";
 
 const Banner = () => {
   return (
@@ -19,7 +20,7 @@ const Banner = () => {
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
             a id nisi.
           </p>
-          <button className="btn text-white bg-gradient-to-r from-[#0FCFEC] to-[#19D3AE]">Get Started</button>
+          <ButtonPrimary>Get Started</ButtonPrimary>
         </div>
       </div>
     </div>
