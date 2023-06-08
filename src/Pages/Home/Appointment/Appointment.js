@@ -19,7 +19,7 @@ const Appointment = () => {
             alt=""
           />
           <div>
-            <h2 className="text-xl text-primary">Appointment</h2>
+            <h2 className="text-xl text-secondary font-bold">Appointment</h2>
             <h1 className="text-3xl font-bold mt-2 text-white">
               Make an appointment Toady
             </h1>
