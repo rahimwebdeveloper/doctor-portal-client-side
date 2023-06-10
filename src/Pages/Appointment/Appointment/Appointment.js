@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import AppointmentBanner from "../AppointmentBanner/AppointmentBanner";
-// import { format } from "date-fns";
-import Services from "../Service/Services";
+import AvailableAppointment from "../AvailableAppointment/AvailableAppointment";
 
 const Appointment = () => {
   const [selectedData, setSelectedData] = useState(new Date());
   return (
-    <div>
+    <div className="mx-10">
       <AppointmentBanner
         selectedData={selectedData}
         setSelectedData={setSelectedData}
       ></AppointmentBanner>
-      <Services selectedData={selectedData}></Services>
-      {/* <p>selected Available data {format(selectedData, 'PP')} </p> */}
+    <AvailableAppointment selectedData={selectedData}></AvailableAppointment>
     </div>
   );
 };
