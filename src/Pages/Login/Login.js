@@ -2,9 +2,9 @@ import React from 'react';
 
 const Login = () => {
     return (
-        <div>
-            <h1>this login home page</h1>
-        </div>
+        <div className="hero min-h-screen bg-base-200">
+       
+      </div>
     );
 };
 

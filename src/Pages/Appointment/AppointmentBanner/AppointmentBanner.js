@@ -5,10 +5,10 @@ const AppointmentBanner = ({selectedData, setSelectedData}) => {
   
   return (
     <div className="hero  ">
-      <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="hero-content  flex-col lg:flex-row-reverse">
         <img
           src={chair}
-          className="max-w-sm lg:ml-20 rounded-lg shadow-2xl"
+          className="max-w-sm  lg:ml-20 rounded-lg shadow-2xl"
           alt=""
         />
         <div>
