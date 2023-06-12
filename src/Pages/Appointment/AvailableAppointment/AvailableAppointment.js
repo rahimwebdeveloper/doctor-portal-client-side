@@ -8,8 +8,6 @@ const AvailableAppointment = ({ selectedData }) => {
 
   const [treatment, setTreatment] = useState({});
 
-  console.log(treatment)
-
   useEffect(() => {
     fetch("appointmentOptions.json")
       .then((res) => res.json())
@@ -30,11 +28,13 @@ const AvailableAppointment = ({ selectedData }) => {
           ></AppointmentOption>
         ))}
       </div>
-      <BookingModel 
-      treatment={treatment}
-      selectedData={selectedData}
-      ></BookingModel>
-    
+      {treatment&& (
+        <BookingModel
+          setTreatment={setTreatment}
+          treatment={treatment}
+          selectedData={selectedData}
+        ></BookingModel>
+      )}
     </section>
   );
 };

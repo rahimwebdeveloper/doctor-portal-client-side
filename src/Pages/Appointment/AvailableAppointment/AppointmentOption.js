@@ -16,7 +16,7 @@ const AppointmentOption = ({ option, setTreatment }) => {
           <button
             className="btn  text-white bg-gradient-to-r from-[#0FCFEC] to-[#19D3AE]"
             onClick={() => {
-              window.BookingModel.showModal()
+              window.BookingModel?.showModal()
               setTreatment(option)
             }}
           >
