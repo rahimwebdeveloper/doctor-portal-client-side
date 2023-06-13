@@ -1,7 +1,27 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { signOut } from 'firebase/auth';
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.inti";
+import Loading from "../Loadign/Loading";
 
 const Navbar = () => {
+  const [user, loading, error] = useAuthState(auth);
+
+  console.log(user?.email);
+
+  const handleSingOut = () => {
+    signOut(auth);
+  };
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
+
+  if(error){
+    return<p> {error?.message}</p>
+  }
+
   const meneItem = (
     <>
       <li>
@@ -20,13 +40,17 @@ const Navbar = () => {
         <NavLink to="/contact_us">Contact Us</NavLink>
       </li>
       <li>
-        <NavLink to="/login">Login</NavLink>
+        {user ? (
+          <li onClick={handleSingOut}>Sing Out</li>
+        ) : (
+          <NavLink to="/login">Login</NavLink>
+        )}
       </li>
     </>
   );
 
   return (
-    <div className="navbar justify-between bg-base-100">
+    <div className="navbar px-5 justify-between bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -52,7 +76,9 @@ const Navbar = () => {
             {meneItem}
           </ul>
         </div>
-        <Link className="btn btn-ghost normal-case text-xl">Doctor Portal</Link>
+        <Link className="btn btn-ghost normal-case text-2xl">
+          Doctor Portal
+        </Link>
       </div>
       <div className="navbar-center hidden  lg:flex">
         <ul className="menu menu-horizontal px-1">{meneItem}</ul>
