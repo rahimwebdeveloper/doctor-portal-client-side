@@ -8,7 +8,6 @@ import Loading from "../Loadign/Loading";
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
 
-  console.log(user?.email);
 
   const handleSingOut = () => {
     signOut(auth);

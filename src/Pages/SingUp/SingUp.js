@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.inti";
+import Loading from "../Shared/Loadign/Loading";
 
 const SingUp = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -25,7 +26,7 @@ const SingUp = () => {
   };
 
   if (loading) {
-    return <p>Loading Is Data</p>;
+    return <Loading/>;
   }
 
 
@@ -97,10 +98,10 @@ const SingUp = () => {
           />
         </form>
         <p className="text-md">
-          New to Doctor Portal ?{" "}
-          <Link className="text-secondary " to="/singUp">
-            Create ne account
-          </Link>{" "}
+          Already have an account ? 
+          <Link className="text-secondary ml-2 " to="/login">
+             Login
+          </Link>
         </p>
         <SocialLogin></SocialLogin>
       </div>

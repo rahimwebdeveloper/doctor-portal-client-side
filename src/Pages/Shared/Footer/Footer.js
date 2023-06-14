@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer>
-      <footer className="footer p-10 text-neutral-content">
+    <section>
+      <footer className="footer bg-base-100 p-10 text-black">
         <div>
           <span className="footer-title">Services</span>
           <Link className="link link-hover">Branding</Link>
@@ -26,7 +26,7 @@ const Footer = () => {
           <Link className="link link-hover">Cookie policy</Link>
         </div>
       </footer>
-    </footer>
+    </section>
   );
 };
 

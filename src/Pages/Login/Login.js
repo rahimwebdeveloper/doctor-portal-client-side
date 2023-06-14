@@ -2,18 +2,26 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.inti";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
+import Loading from "../Shared/Loadign/Loading";
 
 const Login = () => {
-  const [signInWithEmailAndPassword, user, loading, error] =
+  const [signInWithEmailAndPassword, user, loading1, error] =
     useSignInWithEmailAndPassword(auth);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location?.state?.pathname || "/";
+
   const {
     register,
     reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const onSubmit = (data) => {
     const { email, password } = data;
     console.log(email, password);
@@ -23,20 +31,12 @@ const Login = () => {
     reset();
   };
 
-  if (loading) {
-    return (
-      <div>
-        <p>Loading Is Data</p>
-      </div>
-    );
+  if (loading1) {
+    return <Loading />;
   }
 
   if (user) {
-    return (
-      <div>
-        <p>Loading Is Data</p>
-      </div>
-    );
+    navigate(from, { replace: true });
   }
 
   return (
@@ -86,10 +86,10 @@ const Login = () => {
           />
         </form>
         <p className="text-md">
-          New to Doctor Portal ?{" "}
+          New to Doctor Portal ?
           <Link className="text-secondary " to="/singUp">
             Create ne account
-          </Link>{" "}
+          </Link>
         </p>
         <SocialLogin></SocialLogin>
       </div>
