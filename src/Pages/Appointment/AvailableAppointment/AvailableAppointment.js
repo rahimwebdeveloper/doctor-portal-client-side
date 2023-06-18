@@ -1,18 +1,18 @@
 import { format } from "date-fns";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AppointmentOption from "./AppointmentOption";
 import BookingModel from "../BookingModel/BookingModel";
+import { useQuery } from "react-query";
 
 const AvailableAppointment = ({ selectedData }) => {
-  const [availableAppointment, setAvailableAppointment] = useState([]);
+  // const [availableAppointment, setAvailableAppointment] = useState([]);
 
   const [treatment, setTreatment] = useState({});
 
-  useEffect(() => {
-    fetch("appointmentOptions.json")
-      .then((res) => res.json())
-      .then((data) => setAvailableAppointment(data));
-  }, []);
+  const { data: availableAppointment = [] } = useQuery({
+    queryKey: ["AppointmentOption"],
+    queryFn: () => fetch("http://localhost:5000/option").then((res) => res.json()),
+  });
 
   return (
     <section className="my-16 ml-10 md:ml-0 ">
@@ -28,7 +28,7 @@ const AvailableAppointment = ({ selectedData }) => {
           ></AppointmentOption>
         ))}
       </div>
-      {treatment&& (
+      {treatment && (
         <BookingModel
           setTreatment={setTreatment}
           treatment={treatment}
