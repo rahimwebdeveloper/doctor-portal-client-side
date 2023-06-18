@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import auth from "../../firebase.inti";
 import Loading from "../Shared/Loadign/Loading";
 
 const SingUp = () => {
+  const [displayName, setDisplayName] = useState("");
+  const navigate = useNavigate();
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+
+  const [updateProfile, updating, error2] = useUpdateProfile(auth);
 
   const {
     register,
@@ -16,24 +24,22 @@ const SingUp = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
-    const { email, password } = data;
-    console.log(email, password);
-    createUserWithEmailAndPassword(email, password);
 
+  const onSubmit = async (data) => {
+    const { email, password, name } = data;
+    createUserWithEmailAndPassword(email, password);
+    setDisplayName(name);
     /// login successfully and clear form value
     reset();
   };
 
-  if (loading) {
-    return <Loading/>;
+  if (loading || updating) {
+    return <Loading />;
   }
 
-
   if (user) {
-    console.log(user)
-  
-    return <p>user data {user?.email}</p>;
+    // console.log(user);
+    navigate("/");
   }
 
   return (
@@ -91,16 +97,23 @@ const SingUp = () => {
             <span className="cursor-pointer">Forget Password</span>
           </label>
           {error && <p className="text-left text-red-500">{error.message}</p>}
+          {error2 && <p className="text-left text-red-500">{error2.message}</p>}
 
           <input
+            onClick={async () => {
+              const success = await updateProfile({ displayName });
+              if (success) {
+                navigate("/");
+              }
+            }}
             type="submit"
             className="btn btn-accent hover:btn-primary w-full my-2"
           />
         </form>
         <p className="text-md">
-          Already have an account ? 
+          Already have an account ?
           <Link className="text-secondary ml-2 " to="/login">
-             Login
+            Login
           </Link>
         </p>
         <SocialLogin></SocialLogin>

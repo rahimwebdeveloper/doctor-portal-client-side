@@ -87,7 +87,7 @@ const Login = () => {
         </form>
         <p className="text-md">
           New to Doctor Portal ?
-          <Link className="text-secondary " to="/singUp">
+          <Link className="text-secondary ml-2 " to="/singUp">
             Create ne account
           </Link>
         </p>

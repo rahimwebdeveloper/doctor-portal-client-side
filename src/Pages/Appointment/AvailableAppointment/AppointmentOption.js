@@ -14,10 +14,12 @@ const AppointmentOption = ({ option, setTreatment }) => {
         </p>
         <div className="card-actions justify-center">
           <button
-            className="btn  text-white bg-gradient-to-r from-[#0FCFEC] to-[#19D3AE]"
+            disabled={slots.length === 0}
+
+            className={`btn  text-white ${slots.length === 0 ? "" : "bg-gradient-to-r from-[#0FCFEC] to-[#19D3AE]"}`}
             onClick={() => {
-              window.BookingModel?.showModal()
-              setTreatment(option)
+              window.BookingModel?.showModal();
+              setTreatment(option);
             }}
           >
             Book Appointment

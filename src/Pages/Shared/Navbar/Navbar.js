@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { signOut } from 'firebase/auth';
+import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.inti";
 import Loading from "../Loadign/Loading";
@@ -9,6 +9,8 @@ const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
 
 
+  console.log(user)
+  
   const handleSingOut = () => {
     signOut(auth);
   };
@@ -17,8 +19,8 @@ const Navbar = () => {
     return <Loading></Loading>;
   }
 
-  if(error){
-    return<p> {error?.message}</p>
+  if (error) {
+    return <p> {error?.message}</p>;
   }
 
   const meneItem = (
@@ -32,19 +34,26 @@ const Navbar = () => {
       <li>
         <NavLink to="/appointment">Appointment</NavLink>
       </li>
-      <li>
-        <NavLink to="/reviews">Reviews</NavLink>
-      </li>
+
       <li>
         <NavLink to="/contact_us">Contact Us</NavLink>
       </li>
-      <li>
+      <>
         {user ? (
-          <li onClick={handleSingOut}>Sing Out</li>
+          <>
+            <li>
+              <NavLink to="/dashboard">Dashboard</NavLink>
+            </li>
+            <li onClick={handleSingOut}>
+              <button>Sing Out</button>
+            </li>
+          </>
         ) : (
-          <NavLink to="/login">Login</NavLink>
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
         )}
-      </li>
+      </>
     </>
   );
 
